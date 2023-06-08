@@ -33,7 +33,7 @@ services:
       context: ./news-aggregator-backend
       dockerfile: deploy/Dockerfile
       args:
-        APP_ENV: dev
+        APP_ENV: local
     environment:
       PUID: 1000 # How to check UID : execute on host machine `id -u ${whoami}`
       PGID: 1000 # How to check GID : execute on host machine `id -g ${whoami}`
