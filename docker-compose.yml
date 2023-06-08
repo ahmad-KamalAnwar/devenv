@@ -1,0 +1,58 @@
+version: "3"
+services:
+  db:
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    image: mysql:8
+    ports:
+      - "3306:3306/tcp"
+    volumes:
+      - db:/var/lib/mysql
+      - ./docker/provision/mysql/init:/docker-entrypoint-initdb.d
+    container_name: db
+    networks:
+      - aka
+  web_news_aggregator:
+    build:
+      context: ./news-aggregator
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "3005:9000/tcp"
+    volumes:
+      - ./news-aggregator:/app
+    depends_on:
+      - api_news_aggregator
+    restart: on-failure:2
+    container_name: web_news_aggregator
+    networks:
+      - aka
+  api_news_aggregator:
+    image: api_news_aggregator
+    build:
+      context: ./news-aggregator-backend
+      dockerfile: deploy/Dockerfile
+      args:
+        APP_ENV: dev
+    environment:
+      PUID: 1000 # How to check UID : execute on host machine `id -u ${whoami}`
+      PGID: 1000 # How to check GID : execute on host machine `id -g ${whoami}`
+      ERRORS: 1
+    ports:
+      - "7005:80/tcp"
+    volumes:
+      - ./news-aggregator-backend:/var/www/html
+    links:
+      - db
+    depends_on:
+      - db
+    restart: on-failure:2
+    container_name: api_news_aggregator
+    networks:
+      - aka
+volumes:
+  db:
+
+networks:
+  aka:
+    driver: bridge
