@@ -44,14 +44,27 @@ services:
       - ./news-aggregator-backend:/var/www/html
     links:
       - db
+      - redis
     depends_on:
       - db
+      - redis
     restart: on-failure:2
     container_name: api_news_aggregator
     networks:
       - aka
+  redis:
+    image: redis:4.0.11
+    hostname: redis
+    restart: unless-stopped
+    volumes:
+      - redis:/data
+    container_name: redis
+    networks:
+      - aka
+
 volumes:
   db:
+  redis:
 
 networks:
   aka:
