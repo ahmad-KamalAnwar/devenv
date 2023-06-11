@@ -5,6 +5,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     image: mysql:8
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
     ports:
       - "3306:3306/tcp"
     volumes:
@@ -61,7 +63,6 @@ services:
     container_name: redis
     networks:
       - aka
-
 volumes:
   db:
   redis:
