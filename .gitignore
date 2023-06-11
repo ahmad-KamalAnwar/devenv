@@ -1,4 +1,4 @@
 news-aggregator-backend
-news-aggregator-frontend
+news-aggregator
 /.idea/
 docker-compose.yml
