@@ -20,7 +20,7 @@ services:
       context: ./news-aggregator
       dockerfile: deploy/Dockerfile
     ports:
-      - "3005:9000/tcp"
+      - "3005:3000/tcp"
     volumes:
       - ./news-aggregator:/app
     depends_on:
@@ -39,6 +39,7 @@ services:
     environment:
       PUID: 1000 # How to check UID : execute on host machine `id -u ${whoami}`
       PGID: 1000 # How to check GID : execute on host machine `id -g ${whoami}`
+      APP_ENV: local
       ERRORS: 1
     ports:
       - "7005:80/tcp"
