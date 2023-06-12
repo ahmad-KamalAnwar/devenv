@@ -1,4 +1,4 @@
-# Workhub devenv (Admin, connect, scheduling)
+# News Aggregator devenv
 
 The purpose of this repo is to have a single place dev environment to build and deploy applications locally. It contains a docker-compose file which combines all relevant apps as services.
 
@@ -13,8 +13,8 @@ Make sure you have the following utilities installed locally on your machine.
 Please follow the steps below to setup news_aggregator application locally.
 
 1. Clone devenv repo.
-2. Goto devenv directory `cd workhub-devenv`.
-3. Clone the repositories inside the workhub-devenv directory.
+2. Goto devenv directory `cd devenv`.
+3. Clone the repositories inside the devenv directory.
     1. [news-aggregator-backend](https://github.com/ahmad-KamalAnwar/news-aggregator-backend)
     2. [news-aggregator-frontend](https://github.com/ahmad-KamalAnwar/news-aggregator)
 4. For frontend app copy the .env file and rename to .env.local.
