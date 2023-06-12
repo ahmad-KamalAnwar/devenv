@@ -39,3 +39,6 @@ Please follow the steps below to setup news_aggregator application locally.
 - You can use the following command to ssh into any relevant container for package install/update/remove or exploring files.
     - `docker-compose exec [container-name] sh`
 - Whenever there is a change in .env file either front or backend you would need to restart the relevant service container.
+- To import data contact me for API Keys, put them in your env and run the following commands:
+  1. `docker-compose up api_news_aggregator` for running backend
+  2. Now run this in container, `php artisan sync:articles`
